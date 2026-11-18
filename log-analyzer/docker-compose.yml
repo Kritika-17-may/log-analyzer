@@ -1,0 +1,11 @@
+services:
+  log-analyzer:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - log-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  log-data:

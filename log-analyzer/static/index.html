@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Log Analyzer</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Log Analyzer</h1>
+    <div class="actions">
+      <input type="file" id="fileInput" accept=".log,.txt" hidden multiple />
+      <button id="uploadBtn" class="btn btn-primary">Upload Logs</button>
+      <button id="sampleBtn" class="btn btn-secondary">Load Sample Logs</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <h2>Sessions</h2>
+      <ul id="sessionList" class="session-list"></ul>
+      <p id="noSessions" class="muted">No sessions yet. Upload a file or load samples.</p>
+    </aside>
+
+    <section class="content">
+      <div id="emptyState" class="empty-state">
+        <p>Select a session to view its logs.</p>
+      </div>
+
+      <div id="dashboard" class="dashboard hidden">
+        <div class="stats">
+          <div class="stat-card"><span class="stat-value" id="statTotal">0</span><span class="stat-label">Total</span></div>
+          <div class="stat-card error"><span class="stat-value" id="statError">0</span><span class="stat-label">ERROR</span></div>
+          <div class="stat-card warning"><span class="stat-value" id="statWarning">0</span><span class="stat-label">WARNING</span></div>
+          <div class="stat-card info"><span class="stat-value" id="statInfo">0</span><span class="stat-label">INFO</span></div>
+        </div>
+
+        <div class="controls">
+          <select id="levelFilter" class="control">
+            <option value="ALL">All levels</option>
+            <option value="ERROR">ERROR</option>
+            <option value="WARNING">WARNING</option>
+            <option value="INFO">INFO</option>
+            <option value="DEBUG">DEBUG</option>
+            <option value="CRITICAL">CRITICAL</option>
+            <option value="RAW">RAW</option>
+          </select>
+          <input id="searchInput" type="search" class="control" placeholder="Search keyword..." />
+          <span id="resultCount" class="muted"></span>
+        </div>
+
+        <div class="table-wrap">
+          <table class="log-table">
+            <thead>
+              <tr><th>Timestamp</th><th>Level</th><th>Message</th></tr>
+            </thead>
+            <tbody id="logBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
